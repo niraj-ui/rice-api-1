@@ -148,10 +148,18 @@ newtrackC.save((err,user) => {
 })
 }) // end
 
+router.get('/track-order/all', (req, res) => {
+    TrackOrder.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
 //API to get all users
 //API to get user by ID
 router.get('/track-order/:id', (req, res) => {
-    console.log(req.body)
+   // console.log(req.body)
     TrackOrder.findOne({
         mobile: req.params.id
     }, (err, user)=>{
@@ -161,14 +169,6 @@ router.get('/track-order/:id', (req, res) => {
        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
     })
 })// end single find by
-router.get('/track-order/all', (req, res) => {
-    TrackOrder.find({
-}, (err, user)=>{
-        if(err && !user){
-            res.status(401).json({ message:err });
-        }
-       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
-    })
-}) // end 
+
 
 module.exports = router
