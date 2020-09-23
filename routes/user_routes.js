@@ -136,6 +136,12 @@ let newtrackC = new TrackOrder({
     cancelled_date: req.body.cancelled_date,
     cancelled_text: req.body.cancelled_text,
     cancelled_status: req.body.cancelled_status,
+
+    user_name: req.body.user_name,
+    track_id: req.body.track_id,
+    user_adress: req.body.user_adress,
+    currier_name: req.body.currier_name,
+    dilvery_date: req.body.dilvery_date,
   
 })
 //save User
