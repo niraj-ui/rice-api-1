@@ -24,6 +24,11 @@ const trackOrderSchema = new Schema({
     cancelled_text: {type:String},
     cancelled_status: {type:Boolean},
 
+    user_name: {type:String},
+    track_id: {type:String},
+    user_adress: {type:String},
+    currier_name: {type:String},
+    dilvery_date: {type:String},
 
     created:{type:Date, default:Date.now}
 })
