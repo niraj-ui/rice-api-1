@@ -30,6 +30,7 @@ const trackOrderSchema = new Schema({
     currier_name: {type:String},
     dilvery_date: {type:String},
 
+    prod_status: {type:String},
     created:{type:Date, default:Date.now}
 })
 
