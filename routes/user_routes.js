@@ -142,6 +142,8 @@ let newtrackC = new TrackOrder({
     user_adress: req.body.user_adress,
     currier_name: req.body.currier_name,
     dilvery_date: req.body.dilvery_date,
+    
+    prod_status: req.body.prod_status,
   
 })
 //save User
