@@ -169,7 +169,7 @@ router.get('/track-order/all', (req, res) => {
 router.get('/track-order/:id', (req, res) => {
    // console.log(req.body)
     TrackOrder.findOne({
-        mobile: req.params.id
+        track_id: req.params.id
     }, (err, user)=>{
         if(err && !user){
             res.status(401).json({ message:err });
