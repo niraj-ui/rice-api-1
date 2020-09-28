@@ -178,5 +178,56 @@ router.get('/track-order/:id', (req, res) => {
     })
 })// end single find by
 
+//  -------------------------   //
+
+router.post('/add-bill', (req, res)=>{
+    //check if user exits later
+//console.log(req.body)
+  
+let newbill = new AddBill({
+    full_name:req.body.full_name, 
+    mobile_no: req.body.mobile_no,
+    email_id: req.body.email_id,
+    adress: req.body.adress,
+    order_id: req.body.order_id,
+    total_amount: req.body.total_amount,
+
+    item_name: req.body.item_name,
+    item_weight: req.body.item_weight,
+    item_qun: req.body.item_qun,
+    item_rate: req.body.item_rate,
+    item_amount: req.body.item_amount,
+})
+//save User
+newbill.save((err,user) => {
+    // user.hash = undefined;
+    if(err && !user){
+        res.status(401).json({ message:err });
+    }
+   else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+})
+}) // end
+
+router.get('/add-bill/all', (req, res) => {
+    AddBill.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
+//API to get user by ID
+router.get('/add-bill/:id', (req, res) => {
+     console.log(req.body)
+     AddBill.findOne({
+        order_id: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
+
 
 module.exports = router
