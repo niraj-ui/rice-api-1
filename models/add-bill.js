@@ -1,6 +1,15 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
 
+const productSchema = new Schema({
+    item_name:{type:String},
+    item_weight:{type:String},
+    item_qun:{type:String},
+    item_amount:{type:String},
+    item_rate:{type:String},   
+    created:{type:Date, default:Date.now}
+})
+
 const addBillSchema = new Schema({
 
     full_name:{type:String}, 
@@ -16,7 +25,8 @@ const addBillSchema = new Schema({
     item_rate:{type:String},
     item_amount: {type:String},
     
-
+    product: [productSchema],
+    
     created:{type:Date, default:Date.now}
 })
 
