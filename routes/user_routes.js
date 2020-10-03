@@ -206,7 +206,7 @@ router.get('/add-bill/all', (req, res) => {
 //API to get user by ID
 router.get('/add-bill/:id', (req, res) => {
      console.log(req.body)
-     order_id.findOne({
+     AddBill.findOne({
         order_id: req.params.id
      }, (err, user)=>{
          if(err && !user){
