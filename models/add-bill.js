@@ -16,7 +16,8 @@ const addBillSchema = new Schema({
     email_id: {type:String},
     adress: {type:String},
     order_id: {type:String},
-    total_amount: {type:String},    
+    total_amount: {type:String},
+    item_paid: {type:Boolean},
     product: [productSchema],
     created:{type:Date, default:Date.now}
 })
