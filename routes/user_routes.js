@@ -207,7 +207,7 @@ router.get('/add-bill/all', (req, res) => {
 router.get('/add-bill/:id', (req, res) => {
      console.log(req.body)
      AddBill.findOne({
-        order_id: req.params.id
+        mobile_no: req.params.id
      }, (err, user)=>{
          if(err && !user){
              res.status(401).json({ message:err });
