@@ -205,7 +205,7 @@ router.get('/add-bill/all', (req, res) => {
 }) // end 
 //API to get user by ID
 router.get('/add-bill/:id', (req, res) => {
-     console.log(req.body)
+    // console.log(req.body)
      AddBill.findOne({
         mobile_no: req.params.id
      }, (err, user)=>{
@@ -216,5 +216,14 @@ router.get('/add-bill/:id', (req, res) => {
      })
  })// end single find by
 
+//API to delete single user
+router.delete('/add-bill/:id', (req,res)=>{
+    AddBill.findByIdAndDelete(req.params.id, (err, result)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+})
 
 module.exports = router
