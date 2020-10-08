@@ -226,4 +226,15 @@ router.get('/add-bill/:id', (req, res) => {
 //     })
 // })
 
+//API to Update User 
+router.put('/add-bill/:id', (req,res)=>{
+    let updateUser = req.body;
+    AddBill.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
+        if(err){console.log(err)}
+        else{
+            res.send(user)
+        }
+    })
+})
+
 module.exports = router
