@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Contact = require('../models/contact')
 const TrackOrder = require('../models/track-order')
 const AddBill = require('../models/add-bill')
+const krblEnuiry = require('../models/krbl-enquiry')
 //API to Signup User
 router.post('/apply', (req, res)=>{
     //check if user exits later
@@ -237,4 +238,60 @@ router.put('/add-bill/:id', (req,res)=>{
     })
 })
 
+
+
+// krbl start here -----------------------------------------------------------------
+
+router.post('/krbl-enquiry', (req, res)=>{
+  
+let newtrackC = new krblEnuiry({
+    mobile:req.body.mobile,
+
+    name: req.body.name,
+    email: req.body.email,
+    area: req.body.area,
+
+    brands: req.body.brands,
+    invest: req.body.invest,
+    town: req.body.town,
+
+    state: req.body.state,
+    district: req.body.district,
+    pincode: req.body.pincode,
+
+    message: req.body.message,
+})
+//save User
+newtrackC.save((err,user) => {
+    // user.hash = undefined;
+    if(err && !user){
+        res.status(401).json({ message:err });
+    }
+   else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+})
+}) // end
+
+router.get('/krbl-enquiry/all', (req, res) => {
+    krblEnuiry.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
+//API to get user by ID
+router.get('/krbl-enquiry/:id', (req, res) => {
+    // console.log(req.body)
+    krblEnuiry.findOne({
+        mobile_no: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
+
+
+// krbl start here -----------------------------------------------------------------
 module.exports = router
