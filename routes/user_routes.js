@@ -283,7 +283,7 @@ router.get('/krbl-enquiry/all', (req, res) => {
 router.get('/krbl-enquiry/:id', (req, res) => {
     // console.log(req.body)
     krblEnuiry.findOne({
-        mobile_no: req.params.id
+        mobile: req.params.id
      }, (err, user)=>{
          if(err && !user){
              res.status(401).json({ message:err });
@@ -291,7 +291,16 @@ router.get('/krbl-enquiry/:id', (req, res) => {
         else{ res.status(200).json({ status: 'SUCCESS', data: user })}
      })
  })// end single find by
-
+//API to Update User 
+router.put('/krbl-enquiry/:id', (req,res)=>{
+    let updateUser = req.body;
+    krblEnuiry.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
+        if(err){console.log(err)}
+        else{
+            res.send(user)
+        }
+    })
+})
 
 // krbl start here -----------------------------------------------------------------
 module.exports = router
