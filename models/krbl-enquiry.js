@@ -16,7 +16,7 @@ const krblEnquirySchema = new Schema({
 
     pincode: {type:String},
     message: {type:String},
-
+    status: {type:String},
     created:{type:Date, default:Date.now}
 })
 
