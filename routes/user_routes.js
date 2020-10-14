@@ -218,14 +218,14 @@ router.get('/add-bill/:id', (req, res) => {
  })// end single find by
 
 //API to delete single user
-// router.delete('/add-bill/:id', (req,res)=>{
-//     AddBill.findByIdAndDelete(req.params.id, (err, result)=>{
-//         if(err && !user){
-//             res.status(401).json({ message:err });
-//         }
-//        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
-//     })
-// })
+router.delete('/add-bill/delete', (req,res)=>{
+    AddBill.findOneAndDelete({mobile:req.params.mobile}, (err, result)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+})
 
 //API to Update User 
 router.put('/add-bill/:id', (req,res)=>{
