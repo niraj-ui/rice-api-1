@@ -218,14 +218,14 @@ router.get('/add-bill/:id', (req, res) => {
  })// end single find by
 
 //API to delete single user
-router.delete('/add-bill/delete', (req,res)=>{
-    AddBill.findOneAndDelete({mobile:req.params.mobile}, (err, result)=>{
-        if(err && !user){
-            res.status(401).json({ message:err });
-        }
-       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
-    })
-})
+// router.delete('/add-bill/delete', (req,res)=>{
+//     AddBill.findOneAndDelete({mobile:req.params.mobile}, (err, result)=>{
+//         if(err && !user){
+//             res.status(401).json({ message:err });
+//         }
+//        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+//     })
+// })
 
 //API to Update User 
 router.put('/add-bill/:id', (req,res)=>{
@@ -301,6 +301,40 @@ router.put('/krbl-enquiry/:id', (req,res)=>{
         }
     })
 })
+
+/*----------- krbl order --         -----------------  krbl order   ----------- ---------   ------  */
+router.post('/krbl-order', (req, res)=>{
+    let orderbill = new krblOrder(req.body)    //save User
+    orderbill.save((err,user) => {        // user.hash = undefined;
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+    else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end
+
+// all 
+router.get('/krbl-order/all', (req, res) => {
+    krblOrder.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
+//API to get user by ID
+router.get('/krbl-order/:id', (req, res) => {
+    // console.log(req.body)
+    krblOrder.findOne({
+        mobile: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
+
 
 // krbl start here -----------------------------------------------------------------
 module.exports = router
