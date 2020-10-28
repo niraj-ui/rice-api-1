@@ -255,7 +255,7 @@ let newtrackC = new krblEnuiry({
     brands: req.body.brands,
     invest: req.body.invest,
     town: req.body.town,
-
+    status: req.body.status,
     state: req.body.state,
     district: req.body.district,
     pincode: req.body.pincode,
