@@ -245,14 +245,14 @@ router.put('/add-bill/:id', (req,res)=>{
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'nirajbca2011@gmail.com',
-      pass: 'Chini@1703'
+      user: 'ashok22039@gmail.com',
+      pass: 'rdx12345'
     }
   });
   
   var mailOptions = {
-    from: 'nirajbca2011@gmail.com',
-    to: 'nirajbca2011@gmail.com',
+    from: 'ashok22039@gmail.com',
+    to: 'ashok22039@gmail.com',
     subject: 'Sending Email using Node.js',
     text: `Hi Smartherd, thank you for your nice Node.js tutorials.
             I will donate 50$ for this course. Please send me payment options.`
