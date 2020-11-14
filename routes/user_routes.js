@@ -7,6 +7,7 @@ const TrackOrder = require('../models/track-order')
 const AddBill = require('../models/add-bill')
 const krblEnuiry = require('../models/krbl-enquiry')
 const krblOrder = require('../models/krbl-order')
+var smtpTransport = require('nodemailer-smtp-transport');
 //API to Signup User
 router.post('/apply', (req, res)=>{
     //check if user exits later
@@ -251,9 +252,9 @@ var transporter = nodemailer.createTransport({
   });
   
   var mailOptions = {
-    from: 'emailnirajkr@gmail.com',
-    to: 'ashok22039@gmail.com',
-    subject: 'Sending Email using Node.js',
+    from: 'ashok22039@gmail.com',
+    to: 'emailnirajkr@gmail.com',
+    subject: 'Sending Email using Node.js -- live server go to mail ',
     text: `Hi Smartherd, thank you for your nice Node.js tutorials.
             I will donate 50$ for this course. Please send me payment options.`
     // html: '<h1>Hi Smartherd</h1><p>Your Messsage</p>'        
