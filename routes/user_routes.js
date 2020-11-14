@@ -242,14 +242,16 @@ router.put('/add-bill/:id', (req,res)=>{
 })
 // ------------------   -----------     mail send --------------    //
  
-
-var transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {
       user: 'emailnirajkr@gmail.com',
       pass: 'Sonu@1703'
+    },
+     tls:{
+        rejectUnauthorized: false
     }
-  });
+}));
   
   var mailOptions = {
     from: 'ashok22039@gmail.com',
