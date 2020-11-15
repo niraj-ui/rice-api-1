@@ -242,18 +242,32 @@ router.put('/add-bill/:id', (req,res)=>{
     })
 })
 // ------------------   -----------     mail send --------------    //
- var transport = nodemailer.createTransport(smtpTransport({  
-    service: 'gmail',    
+  
+
+// krbl start here -----------------------------------------------------------------
+
+router.post('/krbl-enquiry', (req, res)=>{
+     
+
+var mailOptions = {
+    from: 'ashok22039@gmail.com',
+    to: 'ashok22039@gmail.com',
+    subject: "KRBL Enqiry From "+req.body.name ,
+    // text:  'Mobile:'+req.body.mobile+' Name":'+ req.body.name+' Email : '+ req.body.email + 'Area:' +req.body.area+ 'Brands:'+ req.body.brands + 'invest:'+ req.body.invest +'Town:'+ req.body.town + 'State:'+ req.body.state + 'District:'+ req.body.district +' Pincode:'+ req.body.pincode + 'Status:'+ req.body.status+ 'Message:'+ req.body.message+'',
+    html:   'Mobile:'+req.body.mobile+'<br /> Name:'+ req.body.name+'<br /> Email : '+ req.body.email + '<br /> Area:' +req.body.area+ '<br /> Brands:'+ req.body.brands + '<br /> invest:'+ req.body.invest +'<br /> Town:'+ req.body.town + '<br /> State:'+ req.body.state + '<br /> District:'+ req.body.district +'<br /> Pincode:'+ req.body.pincode + '<br /> Status:'+ req.body.status+ '<br /> Message:'+ req.body.message+''        
+  };
+
+var transport = nodemailer.createTransport(smtpTransport({  
+    service: 'gmail',
+
     auth: {
         xoauth2: xoauth2.createXOAuth2Generator({
-    //   user: 'emailnirajkr@gmail.com',
-        //   pass: 'xxxxxx'
             type: 'OAuth2',
             user: "ashok22039@gmail.com",
             clientId: "403261191202-iqc18jgd17oqa6dshvne06mf2mejujfv.apps.googleusercontent.com",
             clientSecret: "xIQ1JM2yFLa0SPpM8PWJodsL",
             refreshToken: "1//04fg_j8Ke3KhTCgYIARAAGAQSNwF-L9IrvEE1EVKNmPhyJditmnqVUkZYfpC7VbOhQZju15gEb6RkjsfFsiSWBS6FLTZo7P5rahg",
-            accessToken: "ya29.A0AfH6SMBpORRaaCt6CPFJlhIzceeC4cayV9cMxiv2sNi9vstqt9BTnacqVqwf6l0kqqIjOhQWBmjxp5cGCyc_E8jj4y5gvJJuTh32q_qq2ulNbHnQUwuQX6K9TACb57H_d_HaBGkzoLYa38XY0a5wuXtm0ITCa97NFY8-7EV53cA"
+            accessToken: "ya29.A0AfH6SMDASBvckHK0ASJMlb_ekjH80yfvGrQ1PrSH52JfDA_3i-uDLkUc3QENcl_dkaMYXYfua_ZutCBddnRl57_inukQWC24yRie_6ALgmgbLY97ifMwYSn24bZUeSQxoH5rXwEb0RcCnGm1ypMRS8ujP5sZj-P1Old5c2-q2yk"
          })
     },
      tls:{
@@ -261,20 +275,7 @@ router.put('/add-bill/:id', (req,res)=>{
     }
 }));
 
-  
-  var mailOptions = {
-    from: 'ashok22039@gmail.com',
-    to: 'emailnirajkr@gmail.com',
-    subject: 'KRBL -- live server go to mail ',
-    text: `Hi Smartherd, thank you for your nice Node.js tutorials.
-            I will donate 50$ for this course. Please send me payment options.`
-    // html: '<h1>Hi Smartherd</h1><p>Your Messsage</p>'        
-  };
-  
-
-// krbl start here -----------------------------------------------------------------
-
-router.post('/krbl-enquiry', (req, res)=>{
+    
     transport.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
