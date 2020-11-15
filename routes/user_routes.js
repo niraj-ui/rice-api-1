@@ -8,6 +8,7 @@ const AddBill = require('../models/add-bill')
 const krblEnuiry = require('../models/krbl-enquiry')
 const krblOrder = require('../models/krbl-order')
 var smtpTransport = require('nodemailer-smtp-transport');
+const xoauth2 = require('xoauth2');
 //API to Signup User
 router.post('/apply', (req, res)=>{
     //check if user exits later
@@ -241,22 +242,30 @@ router.put('/add-bill/:id', (req,res)=>{
     })
 })
 // ------------------   -----------     mail send --------------    //
- 
-var transporter = nodemailer.createTransport(smtpTransport({
-    service: 'gmail',
+ var transport = nodemailer.createTransport(smtpTransport({  
+    service: 'gmail',    
     auth: {
-      user: 'emailnirajkr@gmail.com',
-      pass: 'Sonu@1703'
+        xoauth2: xoauth2.createXOAuth2Generator({
+    //   user: 'emailnirajkr@gmail.com',
+        //   pass: 'xxxxxx'
+            type: 'OAuth2',
+            user: "ashok22039@gmail.com",
+            clientId: "403261191202-iqc18jgd17oqa6dshvne06mf2mejujfv.apps.googleusercontent.com",
+            clientSecret: "xIQ1JM2yFLa0SPpM8PWJodsL",
+            refreshToken: "1//04fg_j8Ke3KhTCgYIARAAGAQSNwF-L9IrvEE1EVKNmPhyJditmnqVUkZYfpC7VbOhQZju15gEb6RkjsfFsiSWBS6FLTZo7P5rahg",
+            accessToken: "ya29.A0AfH6SMBpORRaaCt6CPFJlhIzceeC4cayV9cMxiv2sNi9vstqt9BTnacqVqwf6l0kqqIjOhQWBmjxp5cGCyc_E8jj4y5gvJJuTh32q_qq2ulNbHnQUwuQX6K9TACb57H_d_HaBGkzoLYa38XY0a5wuXtm0ITCa97NFY8-7EV53cA"
+         })
     },
      tls:{
         rejectUnauthorized: false
     }
 }));
+
   
   var mailOptions = {
     from: 'ashok22039@gmail.com',
     to: 'emailnirajkr@gmail.com',
-    subject: 'Sending Email using Node.js -- live server go to mail ',
+    subject: 'KRBL -- live server go to mail ',
     text: `Hi Smartherd, thank you for your nice Node.js tutorials.
             I will donate 50$ for this course. Please send me payment options.`
     // html: '<h1>Hi Smartherd</h1><p>Your Messsage</p>'        
