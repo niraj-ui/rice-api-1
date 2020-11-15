@@ -275,7 +275,7 @@ router.put('/add-bill/:id', (req,res)=>{
 // krbl start here -----------------------------------------------------------------
 
 router.post('/krbl-enquiry', (req, res)=>{
-    transporter.sendMail(mailOptions, function(error, info){
+    transport.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
         } else {
