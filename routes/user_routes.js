@@ -263,11 +263,12 @@ var transport = nodemailer.createTransport(smtpTransport({
     auth: {
         xoauth2: xoauth2.createXOAuth2Generator({
             type: 'OAuth2',
-            user: "ashok22039@gmail.com",
-            clientId: "403261191202-iqc18jgd17oqa6dshvne06mf2mejujfv.apps.googleusercontent.com",
-            clientSecret: "xIQ1JM2yFLa0SPpM8PWJodsL",
-            refreshToken: "1//04fg_j8Ke3KhTCgYIARAAGAQSNwF-L9IrvEE1EVKNmPhyJditmnqVUkZYfpC7VbOhQZju15gEb6RkjsfFsiSWBS6FLTZo7P5rahg",
-            accessToken: "ya29.A0AfH6SMDASBvckHK0ASJMlb_ekjH80yfvGrQ1PrSH52JfDA_3i-uDLkUc3QENcl_dkaMYXYfua_ZutCBddnRl57_inukQWC24yRie_6ALgmgbLY97ifMwYSn24bZUeSQxoH5rXwEb0RcCnGm1ypMRS8ujP5sZj-P1Old5c2-q2yk"
+            user: "emailnirajkr@gmail.com",
+            clientId: "458877230222-v8v8jbmjrms68nmgfp6m911r8m2gktnp.apps.googleusercontent.com",
+            clientSecret: "7syA6SkfD1iUm9cg3uBaxIBc",
+            refreshToken: "1//04Ljx1AcR7GHnCgYIARAAGAQSNwF-L9IrOphqyuthO20gHcI_6FfB-3jXhdCFZGNkCvua6lh0pyzWk1SCIexBhKDv6LLjmICXvoE",
+            accessToken: "ya29.A0AfH6SMBOCu09efYGDXEVpPc6Zam_w6KEm__S_hMoEoqSkzTIC7Y-0Nfnro3uH5HPRRlJmdsR7NkqlXuW7udOPkvuMPfHKg94VvRt03b28VhBDLE-GoAN9CpMP9fw8zS0PGK6m7zSyAWwQGGu_b2fCX61W6DrNEjIaAAP-w1G-ag"
+
          })
     },
      tls:{
