@@ -259,16 +259,18 @@ var mailOptions = {
 
 var transport = nodemailer.createTransport(smtpTransport({  
     service: 'gmail',
-
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
         xoauth2: xoauth2.createXOAuth2Generator({
             type: 'OAuth2',
             user: "emailnirajkr@gmail.com",
-            clientId: "458877230222-v8v8jbmjrms68nmgfp6m911r8m2gktnp.apps.googleusercontent.com",
-            clientSecret: "7syA6SkfD1iUm9cg3uBaxIBc",
-            refreshToken: "1//0fGKP0B9PJ-5-CgYIARAAGA8SNwF-L9IrxCdal2Mn7kH_l2kjIXap8ri7xnR8zQM-Zy8uu-Oyj745gQxBLFAHMO0wXJtcKXGEaiM",
-            accessToken: "ya29.A0AfH6SMBQkHop-XlwYAtj6KQ5gtg_pmu9AXX3UXpbTTSgAdiFcg_hmqehn0XgvY_bdCLsaHUfzohy9M34IgzrFMSeeY-IahUwu_FhIcSK6e60_DrDFOyPwGfCvP54KGR1tLLo2-O6uCt_sfeYB6tNyLRq6RLwwogxnUSNqCIs_N4",
-            expires: 35932343423
+//             clientId: "458877230222-v8v8jbmjrms68nmgfp6m911r8m2gktnp.apps.googleusercontent.com",
+//             clientSecret: "7syA6SkfD1iUm9cg3uBaxIBc",
+//             refreshToken: "1//0fGKP0B9PJ-5-CgYIARAAGA8SNwF-L9IrxCdal2Mn7kH_l2kjIXap8ri7xnR8zQM-Zy8uu-Oyj745gQxBLFAHMO0wXJtcKXGEaiM",
+            accessToken: "ya29.A0AfH6SMCCA7UgCQuCN-QgJ1vrypFagdU0cWBfyxxSRj__-JQN6iTMCwsSpxik5MERCFbakQaYClPfXVymDBCCu6NDOKMDtSyWmmcQtcStsPOUI5-dLudc8zwgUss4nJCFx2dnxDIDe_lDpie-dGP_RDJTsdm0u9F8fxMGD0TSzr8",
+//             expires: 35932343423
          })
     },
      tls:{
