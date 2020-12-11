@@ -7,6 +7,9 @@ const TrackOrder = require('../models/track-order')
 const AddBill = require('../models/add-bill')
 const krblEnuiry = require('../models/krbl-enquiry')
 const krblOrder = require('../models/krbl-order')
+const ifcoEnuiry = require('../models/ifco-enquiry')
+const ifcoOrder = require('../models/ifco-order')
+
 var smtpTransport = require('nodemailer-smtp-transport');
 const xoauth2 = require('xoauth2');
 //API to Signup User
@@ -379,5 +382,100 @@ router.get('/krbl-order/:id', (req, res) => {
  })// end single find by
 
 
+// IFCO ----- start here -----------------------------------------------------------------
+
+router.post('/ifco-enquiry', (req, res)=>{
+     
+ 
+let newtrackC = new ifcoEnuiry({
+    mobile:req.body.mobile,
+
+    name: req.body.name,
+    email: req.body.email,
+    area: req.body.area,
+
+    brands: req.body.brands,
+    invest: req.body.invest,
+    town: req.body.town,
+    status: req.body.status,
+    state: req.body.state,
+    district: req.body.district,
+    pincode: req.body.pincode,
+
+    message: req.body.message,
+})
+//save User
+newtrackC.save((err,user) => {
+    // user.hash = undefined;
+    if(err && !user){
+        res.status(401).json({ message:err });
+    }
+   else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+})
+}) // end
+
+router.get('/ifco-enquiry/all', (req, res) => {
+    ifcoEnuiry.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
+//API to get user by ID
+router.get('/ifco-enquiry/:id', (req, res) => {
+    // console.log(req.body)
+    ifcoEnuiry.findOne({
+        mobile: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
+//API to Update User 
+router.put('/ifco-enquiry/:id', (req,res)=>{
+    let updateUser = req.body;
+    ifcoEnuiry.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
+        if(err){console.log(err)}
+        else{
+            res.send(user)
+        }
+    })
+})
+
+/*----------- IFCO order --         -----------------  IFCO order   ----------- ---------   ------  */
+router.post('/ifco-order', (req, res)=>{
+    let orderbill = new ifcoOrder(req.body)    //save User
+    orderbill.save((err,user) => {        // user.hash = undefined;
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+    else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end
+
+// all 
+router.get('/ifco-order/all', (req, res) => {
+    ifcoOrder.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
+//API to get user by ID
+router.get('/ifco-order/:id', (req, res) => {
+    // console.log(req.body)
+    ifcoOrder.findOne({
+        mobile: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
 // krbl start here -----------------------------------------------------------------
 module.exports = router
