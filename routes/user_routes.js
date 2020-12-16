@@ -480,7 +480,7 @@ router.get('/ifco-order/:id', (req, res) => {
 
 router.put('/ifco-bill/:id', (req,res)=>{
     let updateUser = req.body;
-    AddBill.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
+    ifcoOrder.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
         if(err){console.log(err)}
         else{
             res.send(user)
