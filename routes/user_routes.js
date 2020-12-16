@@ -483,12 +483,12 @@ router.put('/ifco-bill/:id', (req,res)=>{
     let updateUser = req.body;
     console.log(updateUser);
     console.log(req.params.id);
-    return;
+//     return;
     ifcoOrder.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
         if(err){console.log(err)}
         else{
             res.send(user);
-            console.log(user);
+//             console.log(user);
         }
     })
 })
