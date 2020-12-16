@@ -477,5 +477,15 @@ router.get('/ifco-order/:id', (req, res) => {
         else{ res.status(200).json({ status: 'SUCCESS', data: user })}
      })
  })// end single find by
+
+router.put('/ifco-bill/:id', (req,res)=>{
+    let updateUser = req.body;
+    AddBill.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
+        if(err){console.log(err)}
+        else{
+            res.send(user)
+        }
+    })
+})
 // krbl start here -----------------------------------------------------------------
 module.exports = router
