@@ -478,7 +478,7 @@ router.get('/ifco-order/:id', (req, res) => {
      })
  })// end single find by
 
-router.put('/ifco-bill/:id', (req,res)=>{
+router.put('/ifco-order/:id', (req,res)=>{
     console.log(id);
     let updateUser = req.body;
     console.log(updateUser);
