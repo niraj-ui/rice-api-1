@@ -479,10 +479,10 @@ router.get('/ifco-order/:id', (req, res) => {
  })// end single find by
 
 router.put('/ifco-order/:id', (req,res)=>{
-    console.log(id);
+//     console.log(id);
     let updateUser = req.body;
-    console.log(updateUser);
-    console.log(req.params.id);
+//     console.log(updateUser);
+//     console.log(req.params.id);
 //     return;
     ifcoOrder.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
         if(err){console.log(err)}
