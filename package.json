@@ -19,7 +19,7 @@
     "nodemon": "^2.0.4",
     "nodemailer": "^6.4.15",
     "xoauth2": "^1.2.0",
-     "nodemailer-smtp-transport": "^2.7.4",
+    "nodemailer-smtp-transport": "^2.7.4",
     "razorpay": "^2.0.6",
   }
 }
