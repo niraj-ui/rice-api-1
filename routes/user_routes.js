@@ -9,9 +9,25 @@ const krblEnuiry = require('../models/krbl-enquiry')
 const krblOrder = require('../models/krbl-order')
 const ifcoEnuiry = require('../models/ifco-enquiry')
 const ifcoOrder = require('../models/ifco-order')
+var Razorpay=require("razorpay");
 
 var smtpTransport = require('nodemailer-smtp-transport');
 const xoauth2 = require('xoauth2');
+let instance = new Razorpay({
+    key_id: 'rzp_live_8fH01f5FKiwMJY', // your `KEY_ID`
+    key_secret: '4W6ptic6qa6O12QSwsiINCfx' // your `KEY_SECRET`
+})
+
+router.post("/api/payment/order",(req,res)=>{
+    console.log(req.body)
+    params=req.body;
+    instance.orders.create(params).then((data) => {
+           res.send({"sub":data,"status":"success"});
+    }).catch((error) => {
+           res.send({"sub":error,"status":"failed"});
+    })
+});
+
 //API to Signup User
 router.post('/apply', (req, res)=>{
     //check if user exits later
