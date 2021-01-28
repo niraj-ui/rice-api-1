@@ -14,8 +14,8 @@ var Razorpay=require("razorpay");
 var smtpTransport = require('nodemailer-smtp-transport');
 const xoauth2 = require('xoauth2');
 let instance = new Razorpay({
-    key_id: 'rzp_live_8fH01f5FKiwMJY', // your `KEY_ID`
-    key_secret: '4W6ptic6qa6O12QSwsiINCfx' // your `KEY_SECRET`
+    key_id: 'rzp_live_o6QEMsTX3thyrk', // your `KEY_ID`
+    key_secret: 'AGCquhC7NkpyN11IzvOry5bR' // your `KEY_SECRET`
 })
 
 router.post("/api/payment/order",(req,res)=>{
