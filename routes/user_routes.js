@@ -10,7 +10,8 @@ const krblOrder = require('../models/krbl-order')
 const ifcoEnuiry = require('../models/ifco-enquiry')
 const ifcoOrder = require('../models/ifco-order')
 var Razorpay=require("razorpay");
-
+const IffcoOrder = require('../models/iffco-franchise') // ifco franchiese
+const multer  = require('multer');
 var smtpTransport = require('nodemailer-smtp-transport');
 const xoauth2 = require('xoauth2');
 let instance = new Razorpay({
@@ -461,9 +462,91 @@ router.put('/ifco-enquiry/:id', (req,res)=>{
     })
 })
 
-/*----------- IFCO order --         -----------------  IFCO order   ----------- ---------   ------  */
-router.post('/ifco-order', (req, res)=>{
-    let orderbill = new ifcoOrder(req.body)    //save User
+/*----------- IFCO order --  franchise       -----------------  IFCO order   ----------- ---------   ------  */
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() +'_'+file.originalname)
+    },
+})
+var upload = multer({ storage: storage  })
+
+
+var cpUpload = upload.fields([
+  {name:'adhar_card',maxCount: 1 }, 
+  {name:'pan_card', maxCount:1},
+  {name:'bank_passbook',maxCount: 1 },
+
+  {name:'passport_photo',maxCount: 1 },
+  {name:'qualification_proof',maxCount: 1 },
+  {name:'dob_proof',maxCount: 1 },
+
+  {name:'show_room',maxCount: 1 },
+  {name:'request_letter',maxCount: 1 },
+  {name:'license_proof',maxCount: 1 },
+
+  {name:'gst_proof',maxCount: 1 },
+  {name:'itr_proof',maxCount: 1 },
+
+ ])
+
+
+router.post('/iffco-order', cpUpload, (req, res, next)=>{
+   
+    var adhar_card;
+    var pan_card;
+    var bank_passbook;
+
+    var passport_photo;
+    var qualification_proof;
+    var dob_proof;
+    
+    var show_room;
+    var request_letter;
+    var license_proof;
+
+    var gst_proof;
+    var itr_proof;
+
+    var orderbill=new IffcoOrder({
+    adhar_card:adhar_card,
+    pan_card:pan_card,
+    bank_passbook:bank_passbook,
+
+    passport_photo:passport_photo,
+    qualification_proof:qualification_proof,
+    dob_proof:dob_proof,
+
+    show_room:show_room,
+    request_letter:request_letter,
+    license_proof:license_proof,
+
+    gst_proof:gst_proof,
+    itr_proof:itr_proof,
+
+    name:req.body.name,
+    s_o_name: req.body.s_o_name,
+
+    res_address: req.body.res_address,
+    mobile: req.body.mobile,  
+    alt_mobile: req.body.alt_mobile,
+    email_id: req.body.email_id,
+
+    street: req.body.street,
+    town: req.body.town,
+    block: req.body.block,
+    district: req.body.district,
+
+    post_office: req.body.post_office,
+    pincode: req.body.pincode,
+    state: req.body.state,
+    firm_name: req.body.firm_name,
+    
+    message: req.body.message,
+
+    })
     orderbill.save((err,user) => {        // user.hash = undefined;
         if(err && !user){
             res.status(401).json({ message:err });
@@ -473,8 +556,8 @@ router.post('/ifco-order', (req, res)=>{
 }) // end
 
 // all 
-router.get('/ifco-order/all', (req, res) => {
-    ifcoOrder.find({}, (err, user)=>{
+router.get('/iffco-order/all', (req, res) => {
+    IffcoOrder.find({}, (err, user)=>{
         if(err && !user){
             res.status(401).json({ message:err });
         }
@@ -482,10 +565,9 @@ router.get('/ifco-order/all', (req, res) => {
     })
 }) // end 
 //API to get user by ID
-router.get('/ifco-order/:id', (req, res) => {
+router.get('/krbl-iffco/:id', (req, res) => {
     // console.log(req.body)
-    ifcoOrder.findOne({
-        mobile: req.params.id
+    IffcoOrder.findOne({mobile: req.params.id
      }, (err, user)=>{
          if(err && !user){
              res.status(401).json({ message:err });
@@ -494,19 +576,106 @@ router.get('/ifco-order/:id', (req, res) => {
      })
  })// end single find by
 
-router.put('/ifco-order/:id', (req,res)=>{
-//     console.log(id);
-    let updateUser = req.body;
-//     console.log(updateUser);
-//     console.log(req.params.id);
-//     return;
-    ifcoOrder.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
-        if(err){console.log(err)}
+
+ router.put('/iffco-order/:id', (req,res)=>{
+
+    cpUpload(req, res, function (err) {
+        if (err instanceof multer.MulterError) { 
+            console.log(err);
+            console.log("file not support");
+            res.send("File format should be PNG,JPG,JPEG");
+
+        } else if (err) {console.log(err); console.log("something not support"); res.send(err);}
+        console.log("check call me")
+        console.log(req.file) // Everything went fine.
+        /*  -----------------------------   */
+        
+    console.log(req.params.id)
+    // let updateUser = req.body;
+    console.log("-----------------------------------------------------------------------")
+    var adhar_card;
+    var pan_card;
+    var bank_passbook;
+
+    var passport_photo;
+    var qualification_proof;
+    var dob_proof;
+    
+    var show_room;
+    var request_letter;
+    var license_proof;
+
+    var gst_proof;
+    var itr_proof;
+
+    if(req.files['adhar_card']){adhar_card=req.files['adhar_card'][0].filename;}
+    if(req.files['pan_card']){pan_card=req.files['pan_card'][0].filename;}
+    if(req.files['bank_passbook']){bank_passbook=req.files['bank_passbook'][0].filename;}
+
+    if(req.files['passport_photo']){passport_photo=req.files['passport_photo'][0].filename; }
+    if(req.files['qualification_proof']){qualification_proof=req.files['qualification_proof'][0].filename;}
+    if(req.files['dob_proof']){dob_proof=req.files['dob_proof'][0].filename;}
+
+    if(req.files['show_room']){show_room=req.files['show_room'][0].filename;}
+    if(req.files['request_letter']){request_letter=req.files['request_letter'][0].filename;}
+    if(req.files['license_proof']){license_proof=req.files['license_proof'][0].filename;}
+
+    if(req.files['gst_proof']){gst_proof=req.files['gst_proof'][0].filename;}
+    if(req.files['itr_proof']){itr_proof=req.files['itr_proof'][0].filename;}
+
+    
+    var orderbill=new IffcoOrder({
+    adhar_card:adhar_card,
+    pan_card:pan_card,
+    bank_passbook:bank_passbook,
+
+    passport_photo:passport_photo,
+    qualification_proof:qualification_proof,
+    dob_proof:dob_proof,
+
+    show_room:show_room,
+    request_letter:request_letter,
+    license_proof:license_proof,
+
+    gst_proof:gst_proof,
+    itr_proof:itr_proof,
+
+    _id:req.params.id,
+    name:req.body.name,
+    s_o_name: req.body.s_o_name,
+
+    res_address: req.body.res_address,
+    mobile: req.body.mobile,  
+    alt_mobile: req.body.alt_mobile,
+    email_id: req.body.email_id,
+
+    street: req.body.street,
+    town: req.body.town,
+    block: req.body.block,
+    district: req.body.district,
+
+    post_office: req.body.post_office,
+    pincode: req.body.pincode,
+    state: req.body.state,
+    firm_name: req.body.firm_name,
+    
+    message: req.body.message,
+
+    })
+    
+
+    IffcoOrder.findByIdAndUpdate(req.params.id, orderbill, {new:true},(err, user)=>{
+        if(err){console.log(err);res.send(err)}
         else{
+            console.log(user);
+            res.json(user);
             res.send(user);
-//             console.log(user);
         }
     })
+
+    })
+
+    
 })
 // krbl start here -----------------------------------------------------------------
 module.exports = router
