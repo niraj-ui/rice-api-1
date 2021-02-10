@@ -565,7 +565,7 @@ router.get('/iffco-order/all', (req, res) => {
     })
 }) // end 
 //API to get user by ID
-router.get('/krbl-iffco/:id', (req, res) => {
+router.get('/iffco-order/:id', (req, res) => {
     // console.log(req.body)
     IffcoOrder.findOne({mobile: req.params.id
      }, (err, user)=>{
