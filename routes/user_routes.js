@@ -14,6 +14,7 @@ const IffcoOrder = require('../models/iffco-franchise') // ifco franchiese
 const multer  = require('multer');
 var smtpTransport = require('nodemailer-smtp-transport');
 const xoauth2 = require('xoauth2');
+const path = require('path');
 let instance = new Razorpay({
     key_id: 'rzp_live_o6QEMsTX3thyrk', // your `KEY_ID`
     key_secret: 'AGCquhC7NkpyN11IzvOry5bR' // your `KEY_SECRET`
@@ -677,5 +678,27 @@ router.get('/iffco-order/:id', (req, res) => {
 
     
 })
+/*  --------------------  show image in folder here  -------------------------   ----------      */
+    router.get('/uploads/:name', function (req, res, next) {
+    var options = {
+      root: path.join(__dirname, '../uploads'),
+      dotfiles: 'deny',
+      headers: {
+        'x-timestamp': Date.now(),
+        'x-sent': true
+      }
+    }
+  
+    var fileName = req.params.name
+    res.sendFile(fileName, options, function (err) {
+      if (err) {
+        next(err)
+      } else {
+        console.log('Sent:', fileName)
+      }
+    })
+  })
+/*  --------------------  End   show image in folder here  -------------------------   ----------      */
+
 // krbl start here -----------------------------------------------------------------
 module.exports = router
