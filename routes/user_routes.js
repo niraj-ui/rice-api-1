@@ -601,7 +601,17 @@ router.get('/iffco-order/:id', (req, res) => {
         else{ res.status(200).json({ status: 'SUCCESS', data: user })}
      })
  })// end single find by
-
+//API to get user by ID
+router.get('/iffco-order-mobile/:id', (req, res) => {
+    // console.log(req.body)
+    IffcoOrder.findOne({_id: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
 
  router.put('/iffco-order/:id', (req,res)=>{
 
