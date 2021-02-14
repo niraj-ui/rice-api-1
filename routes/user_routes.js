@@ -604,7 +604,7 @@ router.get('/iffco-order/:id', (req, res) => {
 //API to get user by ID
 router.get('/iffco-order-mobile/:id', (req, res) => {
     // console.log(req.body)
-    IffcoOrder.findOne({_id: req.params.id
+    IffcoOrder.findOne({mobile: req.params.id
      }, (err, user)=>{
          if(err && !user){
              res.status(401).json({ message:err });
