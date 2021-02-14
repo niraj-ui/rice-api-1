@@ -40,6 +40,8 @@ const IffcoFranchiseSchema = new Schema({
     gst_proof: {type:String},
     itr_proof: {type:String},
 
+    approval_letter: {type:String},
+    bill_download: {type:String},
     
     created:{type:Date, default:Date.now}
 })
