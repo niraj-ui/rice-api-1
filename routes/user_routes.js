@@ -22,6 +22,10 @@ const GridFsStorage = require("multer-gridfs-storage");
 const fs = require('fs');
 var uristring = process.env.MONGODB_URI || 'mongodb+srv://niraj:Nie6dY97Hv0xD2Ul@cluster0.im67c.mongodb.net/rice?retryWrites=true&w=majority'
 const promise = mongoose.connect(uristring, { useNewUrlParser: true });
+const conn = mongoose.createConnection(uristring, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}); // end image setup
 
 let instance = new Razorpay({
     key_id: 'rzp_live_o6QEMsTX3thyrk', // your `KEY_ID`
@@ -472,15 +476,27 @@ router.put('/ifco-enquiry/:id', (req,res)=>{
 })
 
 /*----------- IFCO order --  franchise       -----------------  IFCO order   ----------- ---------   ------  */
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'uploads/')
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now() +'_'+file.originalname)
-    },
-})
-var upload = multer({ storage: storage  })
+
+const storage = new GridFsStorage({
+    db: promise,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err);
+          }
+          const filename = buf.toString('hex') + path.extname(file.originalname);
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'uploads'
+          };
+          resolve(fileInfo);
+        });
+      });
+    }
+  });
+  // Set multer storage engine to the newly created object
+  const upload = multer({ storage });
 
 
 var cpUpload = upload.fields([
@@ -706,6 +722,54 @@ router.get('/iffco-order/:id', (req, res) => {
       }
     })
   })
+/*  ----------------------  ---------            image setup                            -----------------------------       ----------------------  ----------      */
+let gfs;
+conn.once("open", () => {
+  // init stream
+  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: "uploads"
+  });
+});
+router.get("/files/:filename", (req, res) => {
+    gfs.find(
+      {
+        filename: req.params.filename
+      },
+      (err, file) => {
+        if (!file) {
+          return res.status(404).json({
+            err: "no files exist"
+          });
+        }
+  
+        return res.json(file);
+      }
+    );
+  });
+  router.get("/image/:filename", (req, res) => {
+    // console.log('id', req.params.id)
+    const file = gfs
+      .find({
+        filename: req.params.filename
+      })
+      .toArray((err, files) => {
+        if (!files || files.length === 0) {
+          return res.status(404).json({
+            err: "no files exist"
+          });
+        }
+        gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+      });
+  });
+  router.post("/files/del/:id", (req, res) => {
+    gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
+      if (err) return res.status(404).json({ err: err.message });
+      res.redirect("/");
+    });
+  });
+
+
+/*  ----------------------  ---------              image setuop end                         -----------------------------       ----------------------  ----------      */
 /*  --------------------  End   show image in folder here  -------------------------   ----------      */
 
 // krbl start here -----------------------------------------------------------------
