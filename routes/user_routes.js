@@ -550,7 +550,8 @@ router.post('/iffco-order', cpUpload, (req, res, next)=>{
 
     gst_proof:gst_proof,
     itr_proof:itr_proof,
-
+        
+    status:req.body.status,
     name:req.body.name,
     s_o_name: req.body.s_o_name,
 
@@ -592,7 +593,7 @@ router.get('/iffco-order/all', (req, res) => {
 //API to get user by ID
 router.get('/iffco-order/:id', (req, res) => {
     // console.log(req.body)
-    IffcoOrder.findOne({mobile: req.params.id
+    IffcoOrder.findOne({_id: req.params.id
      }, (err, user)=>{
          if(err && !user){
              res.status(401).json({ message:err });
@@ -676,6 +677,7 @@ router.get('/iffco-order/:id', (req, res) => {
     bill_download:bill_download,
 
     _id:req.params.id,
+    status:req.body.status,
     name:req.body.name,
     s_o_name: req.body.s_o_name,
 
