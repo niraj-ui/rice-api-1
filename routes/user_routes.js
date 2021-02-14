@@ -15,6 +15,14 @@ const multer  = require('multer');
 var smtpTransport = require('nodemailer-smtp-transport');
 const xoauth2 = require('xoauth2');
 const path = require('path');
+
+const mongoose = require('mongoose');
+const crypto = require("crypto");
+const GridFsStorage = require("multer-gridfs-storage");
+const fs = require('fs');
+var uristring = process.env.MONGODB_URI || 'mongodb+srv://niraj:Nie6dY97Hv0xD2Ul@cluster0.im67c.mongodb.net/rice?retryWrites=true&w=majority'
+const promise = mongoose.connect(uristring, { useNewUrlParser: true });
+
 let instance = new Razorpay({
     key_id: 'rzp_live_o6QEMsTX3thyrk', // your `KEY_ID`
     key_secret: 'AGCquhC7NkpyN11IzvOry5bR' // your `KEY_SECRET`
