@@ -632,7 +632,10 @@ router.get('/iffco-order/:id', (req, res) => {
 
     var gst_proof;
     var itr_proof;
-
+        
+    var approval_letter;
+    var bill_download;
+        
     if(req.files['adhar_card']){adhar_card=req.files['adhar_card'][0].filename;}
     if(req.files['pan_card']){pan_card=req.files['pan_card'][0].filename;}
     if(req.files['bank_passbook']){bank_passbook=req.files['bank_passbook'][0].filename;}
@@ -649,6 +652,9 @@ router.get('/iffco-order/:id', (req, res) => {
     if(req.files['itr_proof']){itr_proof=req.files['itr_proof'][0].filename;}
 
     
+    if(req.files['approval_letter']){approval_letter=req.files['approval_letter'][0].filename;}
+    if(req.files['bill_download']){bill_download=req.files['bill_download'][0].filename;}
+        
     var orderbill=new IffcoOrder({
     adhar_card:adhar_card,
     pan_card:pan_card,
@@ -664,6 +670,10 @@ router.get('/iffco-order/:id', (req, res) => {
 
     gst_proof:gst_proof,
     itr_proof:itr_proof,
+        
+        
+    approval_letter:approval_letter,
+    bill_download:bill_download,
 
     _id:req.params.id,
     name:req.body.name,
