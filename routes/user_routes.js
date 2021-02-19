@@ -514,7 +514,9 @@ var cpUpload = upload.fields([
 
   {name:'gst_proof',maxCount: 1 },
   {name:'itr_proof',maxCount: 1 },
-
+    
+  {name:'approval_letter',maxCount: 1 },
+  {name:'bill_download',maxCount: 1 },
  ])
 
 
