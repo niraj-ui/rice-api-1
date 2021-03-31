@@ -6,7 +6,8 @@ const Contact = require('../models/contact')
 const TrackOrder = require('../models/track-order')
 const AddBill = require('../models/add-bill')
 const krblEnuiry = require('../models/krbl-enquiry')
-const krblOrder = require('../models/krbl-order')
+const krblOrder = require('../models/krbl-order');
+const CementEnquery = require('../models/cement-enquiry')
 const ifcoEnuiry = require('../models/ifco-enquiry')
 const ifcoOrder = require('../models/ifco-order')
 var Razorpay=require("razorpay");
@@ -795,6 +796,38 @@ router.get("/files/:filename", (req, res) => {
 
 /*  ----------------------  ---------              image setuop end                         -----------------------------       ----------------------  ----------      */
 /*  --------------------  End   show image in folder here  -------------------------   ----------      */
+/*----------- krbl order --         -----------------  krbl order   ----------- ---------   ------  */
+router.post('/cement-enquery-order', (req, res)=>{
+    let orderbill = new CementEnquery(req.body)    //save User
+    orderbill.save((err,user) => {        // user.hash = undefined;
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+    else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end
+
+// all 
+router.get('/cement-enquery-order/all', (req, res) => {
+    CementEnquery.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
+//API to get user by ID
+router.get('/cement-enquery-order/:id', (req, res) => {
+    // console.log(req.body)
+    CementEnquery.findOne({
+        mobile: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
 
 // krbl start here -----------------------------------------------------------------
 module.exports = router
