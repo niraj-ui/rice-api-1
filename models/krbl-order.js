@@ -3,19 +3,15 @@ const Schema = mongoose.Schema;
 
 const krblOrderSchema = new Schema({
    
-    name:{type:String},
-    f_name:{type:String},
+      name:{type:String},
     email:{type:String},
     mobile:{type:String},
-    
-    area :{type:String},
-    invest :{type:String},
-    disctrict:{type:String},
-    state :{type:String},
-    town :{type:String},
-   
+    address:{type:String},
+    city:{type:String},
     postcode:{type:String},
     message:{type:String},
+
+    
 
     created:{type:Date, default:Date.now}
 })
