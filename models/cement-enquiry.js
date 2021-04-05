@@ -4,10 +4,16 @@ const Schema = mongoose.Schema;
 const CementEnquerySchema = new Schema({
    
     name:{type:String},
+    f_name:{type:String},
     email:{type:String},
     mobile:{type:String},
-    address:{type:String},
-    city:{type:String},
+
+    area :{type:String},
+    invest :{type:String},
+    disctrict:{type:String},
+    state :{type:String},
+    town :{type:String},
+
     postcode:{type:String},
     message:{type:String},
 
