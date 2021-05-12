@@ -5,6 +5,7 @@ const User = require('../models/user')
 const Contact = require('../models/contact')
 const TrackOrder = require('../models/track-order')
 const AddBill = require('../models/add-bill')
+const AddBillIndiaGate = require('../models/add-bill-indiagate')
 const krblEnuiry = require('../models/krbl-enquiry')
 const krblOrder = require('../models/krbl-order');
 const CementEnquery = require('../models/cement-enquiry')
@@ -836,7 +837,7 @@ router.post('/add-bill-indiaGate', (req, res)=>{
     //check if user exits later
 //console.log(req.body)
   
-let newbill = new AddBill(req.body)
+let newbill = new AddBillIndiaGate(req.body)
 //save User
 newbill.save((err,user) => {
     // user.hash = undefined;
@@ -848,7 +849,7 @@ newbill.save((err,user) => {
 }) // end
 
 router.get('/add-bill-indiaGate/all', (req, res) => {
-    AddBill.find({}, (err, user)=>{
+    AddBillIndiaGate.find({}, (err, user)=>{
         if(err && !user){
             res.status(401).json({ message:err });
         }
@@ -858,7 +859,7 @@ router.get('/add-bill-indiaGate/all', (req, res) => {
 //API to get user by ID
 router.get('/add-bill-indiaGate/:id', (req, res) => {
     // console.log(req.body)
-     AddBill.findOne({
+     AddBillIndiaGate.findOne({
         mobile_no: req.params.id
      }, (err, user)=>{
          if(err && !user){
@@ -872,7 +873,7 @@ router.get('/add-bill-indiaGate/:id', (req, res) => {
 //API to Update User 
 router.put('/add-bill-indiaGate/:id', (req,res)=>{
     let updateUser = req.body;
-    AddBill.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
+    AddBillIndiaGate.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
         if(err){console.log(err)}
         else{
             res.send(user)
