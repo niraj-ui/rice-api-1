@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
 
-const productSchema = new Schema({
+const productIndiaGateSchema = new Schema({
     item_name:{type:String},
     item_weight:{type:String},
     item_qun:{type:String},
@@ -9,7 +9,7 @@ const productSchema = new Schema({
     item_rate:{type:String},   
 })
 
-const addBillSchema = new Schema({
+const addBillIndiaGateSchema = new Schema({
 
     full_name:{type:String}, 
     mobile_no: {type:String},
@@ -18,7 +18,7 @@ const addBillSchema = new Schema({
     order_id: {type:String},
     total_amount: {type:String},
     item_paid: {type:Boolean},
-    product: [productSchema],
+    product: [productIndiaGateSchema],
     created:{type:Date, default:Date.now}
 })
 
