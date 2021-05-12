@@ -830,4 +830,57 @@ router.get('/cement-enquery-order/:id', (req, res) => {
  })// end single find by
 
 // krbl start here -----------------------------------------------------------------
+
+/* -------------- india gate veriosn 2 for uttamm -------------------   ------  */
+router.post('/add-bill-indiaGate', (req, res)=>{
+    //check if user exits later
+//console.log(req.body)
+  
+let newbill = new AddBill(req.body)
+//save User
+newbill.save((err,user) => {
+    // user.hash = undefined;
+    if(err && !user){
+        res.status(401).json({ message:err });
+    }
+   else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+})
+}) // end
+
+router.get('/add-bill-indiaGate/all', (req, res) => {
+    AddBill.find({}, (err, user)=>{
+        if(err && !user){
+            res.status(401).json({ message:err });
+        }
+       else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+    })
+}) // end 
+//API to get user by ID
+router.get('/add-bill-indiaGate/:id', (req, res) => {
+    // console.log(req.body)
+     AddBill.findOne({
+        mobile_no: req.params.id
+     }, (err, user)=>{
+         if(err && !user){
+             res.status(401).json({ message:err });
+         }
+        else{ res.status(200).json({ status: 'SUCCESS', data: user })}
+     })
+ })// end single find by
+
+
+//API to Update User 
+router.put('/add-bill-indiaGate/:id', (req,res)=>{
+    let updateUser = req.body;
+    AddBill.findByIdAndUpdate(req.params.id, updateUser, {new:true},(err, user)=>{
+        if(err){console.log(err)}
+        else{
+            res.send(user)
+        }
+    })
+})
+// ------------------   -----------  end uttam version of india gate bill part   mail send --------------    //
+
+
+
 module.exports = router
