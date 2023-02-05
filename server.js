@@ -18,11 +18,12 @@ const ads = [
 // app.use(cors())
 app.use(logger('dev'));
 
-// var uristring = process.env.MONGODB_URI ||'mongodb+srv://myDoc:myDoc@##123@cluster0-qb2rt.mongodb.net/test?retryWrites=true&w=majority'
+// var uristring = process.env.MONGODB_URI ||'mongodb+srv://myDoc:myDoc@##123@cluster0-qb2rt.mongodb.net/test?retryWrites=true&w  =majority'
 // var uristring = 'mongodb+srv://myDoc:myDoc123@cluster0-qb2rt.mongodb.net/test?retryWrites=true&w=majority'
-var uristring = process.env.MONGODB_URI || 'mongodb+srv://niraj:Nie6dY97Hv0xD2Ul@cluster0.im67c.mongodb.net/rice?retryWrites=true&w=majority'
-
-mongoose.connect(uristring, { useUnifiedTopology: true });
+// var uristring = process.env.MONGODB_URI || 'mongodb+srv://niraj:Nie6dY97Hv0xD2Ul@cluster0.im67c.mongodb.net/rice?retryWrites=true&w=majority'
+var uristring = process.env.MONGODB_URI || 'mongodb+srv://cluster0.im67c.mongodb.net/rice?retryWrites=true&w=majority'
+mongoose.connect(uristring, { useUnifiedTopology: true,useCreateIndex: true,  useNewUrlParser: true});
+console.log("asdasda");
 var db = mongoose.connection;
 
 db.on('error', (err) => {
@@ -52,4 +53,3 @@ require('./routes/routes')(app);
 //global error handlers
 // app.use(errorHandler)
 app.listen(port, () => console.log(`Example app at ${port}`))
-
